@@ -24,6 +24,7 @@ class ExtendedImageGesturePageView extends StatefulWidget {
     ScrollPhysics physics,
     this.pageSnapping = true,
     this.onPageChanged,
+    this.preloadPagesCount = 1,
     List<Widget> children = const <Widget>[],
     CanMovePage canMovePage,
   })  : controller = controller ?? _defaultPageController,
