@@ -56,6 +56,7 @@ class ExtendedImageGesturePageView extends StatefulWidget {
     this.onPageChanged,
     @required IndexedWidgetBuilder itemBuilder,
     int itemCount,
+    this.preloadPagesCount = 1,
     CanMovePage canMovePage,
   })  : controller = controller ?? _defaultPageController,
         childrenDelegate =
@@ -76,6 +77,7 @@ class ExtendedImageGesturePageView extends StatefulWidget {
     //this.physics,
     this.pageSnapping = true,
     this.onPageChanged,
+    this.preloadPagesCount = 1,
     CanMovePage canMovePage,
     @required this.childrenDelegate,
   })  : assert(childrenDelegate != null),
@@ -125,6 +127,8 @@ class ExtendedImageGesturePageView extends StatefulWidget {
 
   /// Called whenever the page in the center of the viewport changes.
   final ValueChanged<int> onPageChanged;
+
+  final int preloadPagesCount;
 
   /// A delegate that provides the children for the [PageView].
   ///
@@ -230,7 +234,7 @@ class ExtendedImageGesturePageViewState
 //      finallyPhysics = finallyPhysics.applyTo(widget.physics);
 //    }
 
-    Widget result = PageView.custom(
+    Widget result = PreloadPageView.custom(
       scrollDirection: widget.scrollDirection,
       reverse: widget.reverse,
       controller: widget.controller,
@@ -239,6 +243,7 @@ class ExtendedImageGesturePageViewState
       physics: widget.physics,
       onPageChanged: widget.onPageChanged,
       key: widget.key,
+      preloadPagesCount: widget.preloadPagesCount,
     );
 
     result = RawGestureDetector(
